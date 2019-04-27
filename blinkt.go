@@ -1,4 +1,4 @@
-package sysfs
+package blinkt
 
 import (
 	"fmt"
@@ -10,8 +10,10 @@ import (
 	"github.com/russelltsherman/gpio"
 )
 
-// DAT
+// DAT the data pin
 const DAT int = 23
+
+// CLK the clock pin
 const CLK int = 24
 
 const redIndex int = 0
@@ -90,7 +92,7 @@ func (bl *Blinkt) Show() {
 		writeByte(0)
 	}
 
-	for p, _ := range bl.pixels {
+	for p := range bl.pixels {
 		brightness := bl.pixels[p][brightnessIndex]
 		r := bl.pixels[p][redIndex]
 		g := bl.pixels[p][greenIndex]
@@ -109,7 +111,7 @@ func (bl *Blinkt) Show() {
 // SetAll sets all pixels to specified r, g, b colour. Show must be called to update the LEDs.
 func (bl *Blinkt) SetAll(r int, g int, b int) *Blinkt {
 
-	for p, _ := range bl.pixels {
+	for p := range bl.pixels {
 		bl.SetPixel(p, r, g, b)
 	}
 
@@ -132,7 +134,7 @@ func (bl *Blinkt) SetBrightness(brightness float64) *Blinkt {
 
 	brightnessInt := convertBrightnessToInt(brightness)
 
-	for p, _ := range bl.pixels {
+	for p := range bl.pixels {
 		bl.pixels[p][brightnessIndex] = brightnessInt
 	}
 
@@ -149,7 +151,7 @@ func (bl *Blinkt) SetPixelBrightness(p int, brightness float64) *Blinkt {
 
 func initPixels(brightness int) [8][4]int {
 	var pixels [8][4]int
-	for p, _ := range pixels {
+	for p := range pixels {
 
 		pixels[p][redIndex] = 0
 		pixels[p][greenIndex] = 0
