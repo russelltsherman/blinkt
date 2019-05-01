@@ -5,22 +5,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ClearCommand returns a cobra command
-func ClearCommand() *cobra.Command {
+// CPULoadCommand returns a cobra command
+func CPULoadCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "clear",
-		Short: "turn off all pizels",
+		Use:   "cpuload",
+		Short: "a visual representation of cpu load",
 		Run: func(cmd *cobra.Command, args []string) {
 			brightness := 0.1
 			blinkt := lib.NewBlinkt(brightness)
 			blinkt.Setup()
-			blinkt.Clear()
-			blinkt.Show()
-			blinkt.Clear()
-			blinkt.Show()
-			blinkt.Clear()
-			blinkt.Show()
+			lib.Delay(100)
+
 		},
 	}
 	return cmd
 }
+
+// https://github.com/pimoroni/blinkt/blob/master/examples/cpu_load.py

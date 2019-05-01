@@ -39,23 +39,18 @@ func writeByte(val int) {
 }
 
 func convertBrightnessToInt(brightness float64) int {
-
 	if !inRangeFloat(minBrightness, brightness, maxBrightness) {
 		log.Fatalf("Supplied brightness was %#v - value should be between: %#v and %#v", brightness, minBrightness, maxBrightness)
 	}
-
 	return int(brightness * 31.0)
-
 }
 
 func inRangeFloat(minVal float64, testVal float64, maxVal float64) bool {
-
 	return (testVal >= minVal) && (testVal <= maxVal)
 }
 
 // SetClearOnExit turns all pixels off on Control + C / os.Interrupt signal.
 func (bl *Blinkt) SetClearOnExit(clearOnExit bool) {
-
 	if clearOnExit {
 
 		signalChan := make(chan os.Signal, 1)
@@ -91,13 +86,11 @@ func (bl *Blinkt) Show() {
 	for i := 0; i < 4; i++ {
 		writeByte(0)
 	}
-
 	for p := range bl.pixels {
 		brightness := bl.pixels[p][brightnessIndex]
 		r := bl.pixels[p][redIndex]
 		g := bl.pixels[p][greenIndex]
 		b := bl.pixels[p][blueIndex]
-
 		// 0b11100000 (224)
 		bitwise := 224
 		writeByte(bitwise | brightness)
@@ -110,40 +103,31 @@ func (bl *Blinkt) Show() {
 
 // SetAll sets all pixels to specified r, g, b colour. Show must be called to update the LEDs.
 func (bl *Blinkt) SetAll(r int, g int, b int) *Blinkt {
-
 	for p := range bl.pixels {
 		bl.SetPixel(p, r, g, b)
 	}
-
 	return bl
 }
 
 // SetPixel sets an individual pixel to specified r, g, b colour. Show must be called to update the LEDs.
 func (bl *Blinkt) SetPixel(p int, r int, g int, b int) *Blinkt {
-
 	bl.pixels[p][redIndex] = r
 	bl.pixels[p][greenIndex] = g
 	bl.pixels[p][blueIndex] = b
-
 	return bl
-
 }
 
 // SetBrightness sets the brightness of all pixels. Brightness supplied should be between: 0.0 to 1.0
 func (bl *Blinkt) SetBrightness(brightness float64) *Blinkt {
-
 	brightnessInt := convertBrightnessToInt(brightness)
-
 	for p := range bl.pixels {
 		bl.pixels[p][brightnessIndex] = brightnessInt
 	}
-
 	return bl
 }
 
 // SetPixelBrightness sets the brightness of pixel p. Brightness supplied should be between: 0.0 to 1.0
 func (bl *Blinkt) SetPixelBrightness(p int, brightness float64) *Blinkt {
-
 	brightnessInt := convertBrightnessToInt(brightness)
 	bl.pixels[p][brightnessIndex] = brightnessInt
 	return bl
@@ -152,12 +136,10 @@ func (bl *Blinkt) SetPixelBrightness(p int, brightness float64) *Blinkt {
 func initPixels(brightness int) [8][4]int {
 	var pixels [8][4]int
 	for p := range pixels {
-
 		pixels[p][redIndex] = 0
 		pixels[p][greenIndex] = 0
 		pixels[p][blueIndex] = 0
 		pixels[p][brightnessIndex] = brightness
-
 	}
 	return pixels
 }
@@ -171,7 +153,6 @@ func (bl *Blinkt) Setup() {
 
 // NewBlinkt creates a Blinkt to interact with. You must call "Setup()" immediately afterwards.
 func NewBlinkt(brightness ...float64) Blinkt {
-
 	//brightness is optional so set the default
 	brightnessInt := defaultBrightnessInt
 
