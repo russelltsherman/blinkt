@@ -8,6 +8,7 @@ import (
 func AddCommands(cmd *cobra.Command) {
 	cmd.AddCommand(
 		RevolvingCommand(),
+		SequenceCommand(),
 		VersionCommand(),
 	)
 }
