@@ -13,7 +13,6 @@ func ClearCommand() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			brightness := 0.1
 			blinkt := lib.NewBlinkt(brightness)
-			blinkt.SetClearOnExit(true)
 			blinkt.Setup()
 			blinkt.Clear()
 			blinkt.Show()
