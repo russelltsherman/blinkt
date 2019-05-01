@@ -21,13 +21,13 @@ func LarsonCommand() *cobra.Command {
 			b := 0
 
 			for {
-				for pixel := 0; pixel < 8; pixel++ {
+				for pixel := 0; pixel <= 7; pixel++ {
 					blinkt.Clear()
 					blinkt.SetPixel(pixel, r, g, b)
 					blinkt.Show()
 					lib.Delay(100)
 				}
-				for pixel := 8; pixel > 0; pixel-- {
+				for pixel := 7; pixel >= 0; pixel-- {
 					blinkt.Clear()
 					blinkt.SetPixel(pixel, r, g, b)
 					blinkt.Show()
