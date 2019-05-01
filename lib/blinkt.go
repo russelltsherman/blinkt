@@ -1,4 +1,4 @@
-package blinkt
+package lib
 
 import (
 	"fmt"

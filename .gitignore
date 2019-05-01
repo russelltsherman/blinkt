@@ -1,0 +1,11 @@
+# ignore build harness
+*build-harness
+
+# ignore vendored packages
+vendor/*
+
+# ignore compiled main
+blinkt
+
+# ignore dist directory
+dist
